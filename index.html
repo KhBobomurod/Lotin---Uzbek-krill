@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lotindan Kirillga</title>
+    <style>
+      /* Umumiy stil */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(to bottom right, #1e3a8a, #2563eb);
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        width: 100%;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #e0e7ffb4;
+      }
+
+      textarea {
+        color: #000;
+        width: 100%;
+        background: rgb(255, 255, 255);
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 15px;
+        resize: none;
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #1e3a8a;
+        background: #e0e7ff;
+        border: none;
+        border-radius: 5px 5px 0 0;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      button:hover {
+        background: #1e3a8a;
+        color: #fff;
+      }
+
+      footer {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #cbd5e1;
+      }
+
+      footer a {
+        color: #e0e7ff;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+      #outputText {
+        border-radius: 0 0 5px 5px;
+      }
+
+      /* Responsiv dizayn */
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 20px;
+        }
+
+        textarea,
+        button {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lotindan Kirillga o‘giruvchi</h1>
+      <textarea
+        id="inputText"
+        rows="5"
+        placeholder="Matnni kiriting..."
+      ></textarea>
+      <button onclick="convertText()">O‘zgartirish</button>
+      <textarea
+        id="outputText"
+        rows="5"
+        placeholder="Natija bu yerda ko‘rinadi..."
+        readonly
+      ></textarea>
+      <footer>
+        <p>
+          Ushbu dastur
+          <a href="https://t.me/whyCode_b" target="_blank">Bobomurod</a>
+          tomonidan yaratilgan.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      function convertText() {
+        const inputText = document.getElementById("inputText").value;
+        const outputText = transliterate(inputText);
+        document.getElementById("outputText").value = outputText;
+      }
+
+      function transliterate(text) {
+        const translitRules = {
+          a: "а",
+          b: "б",
+          d: "д",
+          e: "е",
+          f: "ф",
+          g: "г",
+          h: "ҳ",
+          i: "и",
+          j: "ж",
+          k: "к",
+          l: "л",
+          m: "м",
+          n: "н",
+          o: "о",
+          p: "п",
+          q: "қ",
+          r: "р",
+          s: "с",
+          t: "т",
+          u: "у",
+          v: "в",
+          x: "х",
+          y: "й",
+          z: "з",
+          ch: "ч",
+          sh: "ш",
+          yo: "ё",
+          yu: "ю",
+          ya: "я",
+          oo: "ў",
+          gg: "ғ",
+          ng: "нг",
+          " ": " ",
+        };
+
+        let result = text;
+        Object.keys(translitRules).forEach((key) => {
+          const regex = new RegExp(key, "g");
+          result = result.replace(regex, translitRules[key]);
+        });
+
+        return result;
+      }
+    </script>
+  </body>
+</html>
